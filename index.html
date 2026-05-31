@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Go Up</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header id="header">
+            <div id="header-stats">
+                <div class="stat-pill">
+                    <span class="stat-label">Cash</span>
+                    <span class="stat-value" id="hud-cash">$10000</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-label">Portfolio</span>
+                    <span class="stat-value" id="hud-portfolio">$0</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="stat-label">Net Worth</span>
+                    <span class="stat-value" id="hud-net-worth">$10000</span>
+                </div>
+                <div class="stat-pill prestige-pill">
+                    <span class="stat-label">Prestige Points</span>
+                    <span class="stat-value" id="hud-prestige">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main id="main">
+            <section id="market-section">
+                <div class="section-header">
+                    <h2>Market</h2>
+                    <div id="dividend-timer">
+                        <span id="div-label">Next Dividend:</span>
+                        <div id="div-bar-wrap"><div id="div-bar"></div></div>
+                        <span id="div-countdown">10s</span>
+                    </div>
+                </div>
+                <table id="stock-table">
+                    <thead>
+                        <tr>
+                            <th>Ticker</th>
+                            <th>Price</th>
+                            <th>Change</th>
+                            <th>Owned</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stock-body"></tbody>
+                </table>
+            </section>
+            <section id="portfolio-section">
+                <div class="section-header">
+                    <h2>Holdings</h2>
+                </div>
+                <div id="holdings-body"><p class="empty-msg">You don't have any shares yet.</p></div>
+            </section>
+
+            <section id="news-section">
+                <div class="section-header"><h2>Market News</h2></div>
+                <div id="news-feed">
+                    <div class="news-item"><span class="news-ticker">MARKET</span> - Markets open!</div>
+                </div>
+            </section>
+        </main>
+
+        <div id="toast"></div>
+    </div>
+
+    <script src="game.js"></script>
+
+</body>
+</html>

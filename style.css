@@ -1,0 +1,268 @@
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0f0f0f;
+  --bg2:       #1a1a1a;
+  --bg3:       #242424;
+  --border:    #2e2e2e;
+  --text:      #e8e8e8;
+  --text2:     #999;
+  --text3:     #555;
+  --green:     #22c55e;
+  --red:       #ef4444;
+  --gold:      #f59e0b;
+  --blue:      #3b82f6;
+  --radius:    8px;
+  --font:      'Inter', system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+#game-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+#header-stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 100px;
+}
+
+.prestige-pill { border-color: var(--gold); }
+
+.stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text3);
+}
+
+.stat-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Main layout ── */
+#main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── Section ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.section-header h2 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text2);
+}
+
+/* ── Dividend timer ── */
+#dividend-timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text2);
+}
+
+#div-bar-wrap {
+  width: 80px;
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#div-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+#div-countdown { min-width: 28px; }
+
+/* ── Stock table ── */
+#stock-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#stock-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text3);
+  padding: 0 10px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+#stock-table th:last-child,
+#stock-table th:nth-last-child(2) { text-align: right; }
+
+#stock-table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+#stock-table td:last-child,
+#stock-table td:nth-last-child(2) { text-align: right; }
+
+#stock-table tbody tr:hover { background: var(--bg2); }
+
+.ticker-name { font-weight: 600; font-size: 13px; }
+.ticker-company { font-size: 11px; color: var(--text2); margin-top: 1px; }
+
+.tag {
+  display: inline-block;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.tag-tech   { background: #1e3a5f; color: #60a5fa; }
+.tag-blue   { background: #1a3a2a; color: #4ade80; }
+.tag-meme   { background: #3a1a1a; color: #f87171; }
+
+.price-cell { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.change-pos { color: var(--green); font-size: 12px; }
+.change-neg { color: var(--red);   font-size: 12px; }
+.change-neu { color: var(--text3); font-size: 12px; }
+
+.action-cell { display: flex; justify-content: flex-end; gap: 6px; }
+
+.btn-buy, .btn-sell {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s;
+}
+.btn-buy:active, .btn-sell:active { transform: scale(0.96); }
+.btn-buy  { background: var(--green); color: #000; }
+.btn-sell { background: var(--red);   color: #fff; }
+.btn-buy:disabled, .btn-sell:disabled { opacity: .25; cursor: default; }
+
+/* ── Holdings ── */
+.empty-msg { color: var(--text3); font-size: 13px; padding: 4px 0; }
+
+.holding-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.holding-ticker { font-weight: 700; font-size: 14px; min-width: 50px; }
+.holding-detail { font-size: 12px; color: var(--text2); }
+.holding-value  { font-weight: 600; color: var(--green); text-align: right; }
+.holding-div    { font-size: 11px; color: var(--text3); text-align: right; }
+
+/* ── News feed ── */
+#news-feed { display: flex; flex-direction: column; gap: 6px; }
+
+.news-item {
+  font-size: 12px;
+  color: var(--text2);
+  padding: 7px 10px;
+  background: var(--bg2);
+  border-left: 2px solid var(--border);
+  border-radius: 0 4px 4px 0;
+}
+
+.news-item.news-new { border-left-color: var(--gold); }
+
+.news-ticker {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 12px;
+}
+
+/* ── Toast ── */
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s;
+  white-space: nowrap;
+  z-index: 100;
+}
+
+#toast.show { opacity: 1; }
