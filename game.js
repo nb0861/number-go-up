@@ -6,6 +6,10 @@
 const TICK_MS = 1000;
 const TICKS_PER_SEC = 1000 / TICK_MS;
 
+const GAME_SPEED = 5;
+let gameTime = 0;
+
+
 // ── Prestige state (persists across resets) ──
 const prestige = {
     points: 0,
@@ -72,6 +76,14 @@ const prestige = {
     el.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+  }
+
+  function fmtGameTime(secs){
+    const day = Math.floor(secs / 86400 + 1);
+    const hour = Math.floor((secs % 86400) / 3600);
+    const min = Math.floor((secs % 3600) / 60);
+    const sec = Math.floor(secs % 60);
+    return `Day ${day} ${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
   }
   
   // ── Calculations ──
@@ -140,6 +152,8 @@ const prestige = {
   
   // ── Game tick ──
   function gameTick() {
+    gameTime += GAME_SPEED * (TICK_MS / 1000);
+    document.getElementById('hud-gametime').textContent = fmtGameTime(gameTime);
     run.tick++;
   
     // Move prices
