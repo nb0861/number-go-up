@@ -212,34 +212,31 @@ const prestige = {
 
     run.stocks.forEach((s, i) => {
       let tr = tbody.rows[i];
-      if (!tr) {
-        tr = document.createElement('tr');
+      if(!tr){
+        const template = document.getElementById('stock-row-template');
+        tr = template.content.cloneNode(true).firstElementChild;
+        tr.querySelector('.btn-buy').addEventListener('click', () => buy(s.ticker));
+        tr.querySelector('.btn-sell').addEventListener('click', () => sell(s.ticker));
         tbody.appendChild(tr);
       }
-
-      const diff = s.price - s.prevPrice;
-      const pct  = (diff / s.prevPrice) * 100;
-      const cls  = diff > 0.0001 ? 'change-pos' : diff < -0.0001 ? 'change-neg' : 'change-neu';
+      const diff  = s.price - s.prevPrice;
+      const pct   = (diff / s.prevPrice) * 100;
+      const cls   = diff > 0.0001 ? 'change-pos' : diff < -0.0001 ? 'change-neg' : 'change-neu';
       const arrow = diff > 0.0001 ? '▲' : diff < -0.0001 ? '▼' : '—';
       const owned = run.holdings[s.ticker] || 0;
       const canBuy = run.cash >= s.price;
-  
-      tr.innerHTML = `
-        <td>
-          <div class="ticker-name">${s.ticker}<span class="tag tag-${s.tag}">${s.tag}</span></div>
-          <div class="ticker-company">${s.name}</div>
-        </td>
-        <td class="price-cell">${fmtPrice(s.price)}</td>
-        <td class="${cls}">${arrow} ${Math.abs(pct).toFixed(2)}%</td>
-        <td>${owned}</td>
-        <td>
-          <div class="action-cell">
-            <button class="btn-buy"  onclick="buy('${s.ticker}')"  ${canBuy ? '' : 'disabled'}>Buy</button>
-            <button class="btn-sell" onclick="sell('${s.ticker}')" ${owned > 0 ? '' : 'disabled'}>Sell</button>
-          </div>
-        </td>`;
+    
+      // Only update the cells that change — buttons are never touched
+      tr.cells[0].querySelector('.ticker-name').innerHTML  = `${s.ticker}<span class="tag tag-${s.tag}">${s.tag}</span>`;
+      tr.cells[0].querySelector('.ticker-company').textContent = s.name;
+      tr.cells[1].textContent = fmtPrice(s.price);
+      tr.cells[2].className   = cls;
+      tr.cells[2].textContent = `${arrow} ${Math.abs(pct).toFixed(2)}%`;
+      tr.cells[3].textContent = owned;
+      tr.cells[4].querySelector('.btn-buy').disabled  = !canBuy;
+      tr.cells[4].querySelector('.btn-sell').disabled = owned < 1;
     });
-  
+
     // Holdings
     const holdEl = document.getElementById('holdings-body');
     const entries = Object.entries(run.holdings);

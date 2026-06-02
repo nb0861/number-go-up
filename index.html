@@ -54,6 +54,23 @@
                         </tr>
                     </thead>
                     <tbody id="stock-body"></tbody>
+                    <template id="stock-row-template">
+                        <tr>
+                            <td>
+                                <div class="ticker-name"></div>
+                                <div class="ticker-company"></div>
+                            </td>
+                            <td class="price-cell"></td>
+                            <td class="change-cell"></td>
+                            <td class="owned-cell"></td>
+                            <td>
+                                <div class="action-cell">
+                                    <button class="btn-buy">Buy</button>
+                                    <button class="btn-sell">Sell</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
                 </table>
             </section>
             <section id="portfolio-section">
