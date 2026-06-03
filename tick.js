@@ -45,7 +45,12 @@ function gameTick() {
     // ── Track peak net worth ──
     const nw = getNetWorth();
     if (nw > run.peakNetWorth) run.peakNetWorth = nw;
+
+    // ── Update net worth history ──
+    netWorthHistory.push(nw);
+    if (netWorthHistory.length > MAX_HISTORY) netWorthHistory.shift();
   
+    drawChart();
     render();
   }
   

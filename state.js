@@ -16,6 +16,10 @@ const prestige = {
   
   // ── Game time ──
   let gameTime = 0;
+
+  // ── Net worth history (last 1 min = 60 ticks at 1/sec) ──
+  const MAX_HISTORY = 60;
+  const netWorthHistory = [];
   
   // ── Run state (wiped on prestige) ──
   let run = newRunState();
