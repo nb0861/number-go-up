@@ -50,10 +50,10 @@ function gameTick() {
     netWorthHistory.push(nw);
     if (netWorthHistory.length > MAX_HISTORY) netWorthHistory.shift();
   
-    drawChart();
     render();
   }
   
   // ── Start ──
   render();
   setInterval(gameTick, TICK_MS);
+  setInterval(drawChart, 100);
