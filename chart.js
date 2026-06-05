@@ -53,11 +53,15 @@ function drawChart() {
     // ── Line ──
     ctx.beginPath();
     padded.forEach((v, i) => {
-      i === 0 ? ctx.moveTo(toX(i), toY(v)) : ctx.lineTo(toX(i), toY(v));
+      if (i === 0) {
+        ctx.moveTo(toX(i), toY(v));
+      } else {
+        const cpX = (toX(i - 1) + toX(i)) / 2;
+        ctx.bezierCurveTo(cpX, toY(padded[i - 1]), cpX, toY(v), toX(i), toY(v));
+      }
     });
     ctx.strokeStyle = '#22c55e';
     ctx.lineWidth   = 1.5;
-    ctx.lineJoin    = 'round';
     ctx.stroke();
   
     // ── Min / max labels ──
