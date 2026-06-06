@@ -79,6 +79,24 @@ body {
   color: var(--text);
 }
 
+/* ── Prestige button ── */
+#prestige-btn {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+#prestige-btn:hover {
+  background: var(--gold);
+  color: #000;
+}
+
 /* ── Net worth chart ── */
 #chart-wrap {
   background: var(--bg2);

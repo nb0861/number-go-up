@@ -54,6 +54,7 @@ function gameTick() {
   }
   
   // ── Start ──
+  updatePrestigeButton();
   render();
   setInterval(gameTick, TICK_MS);
   setInterval(drawChart, 100);
